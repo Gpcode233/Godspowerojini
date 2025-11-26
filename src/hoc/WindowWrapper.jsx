@@ -8,7 +8,14 @@ const WindowWrapper = (Component, windowKey) => {
 
     const Wrapped = (props) => {
         const { focusWindow, windows } = useWindowStore();
-        const { isOpen, zIndex } = windows[windowKey];
+        const windowState = windows[windowKey];
+
+        if (!windowState) {
+            console.error(`WindowWrapper: Unknown window key "${windowKey}"`);
+            return null;
+        }
+
+        const { isOpen, zIndex } = windowState;
         const ref = useRef(null);
 
         useGSAP(() => {
@@ -29,9 +36,9 @@ const WindowWrapper = (Component, windowKey) => {
             const el = ref.current;
             if (!el) return;
 
-            const [instance] = Draggable.create(el, { 
+            const [instance] = Draggable.create(el, {
                 onPress: () => focusWindow(windowKey)
-             });
+            });
 
             return () => instance.kill();
 
