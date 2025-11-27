@@ -13,6 +13,47 @@ body {
   background-position: center;
 }
 
+.mac-shell {
+  display: block;
+}
+
+  .ios-shell {
+    display: none;
+  }
+
+  .ios-shell--active {
+    width: 100%;
+    height: 100%;
+  }
+
+@media (max-width: 600px) {
+  body {
+    background-image: url("/images/ios/ios-HomeScreenBackground.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow-y: auto;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  main {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .mac-shell {
+    display: none;
+  }
+
+  .ios-shell {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+  }
+}
+
 @theme {
   --font-georama: "Georama", sans-serif;
   --font-roboto: "Roboto Mono", monospace;
@@ -392,5 +433,224 @@ body {
         }
       }
     }
+  }
+
+  .ios-device {
+    @apply w-full h-full relative overflow-hidden;
+  }
+
+  .ios-notch {
+    display: none;
+  }
+
+  .ios-home {
+    @apply w-full h-full flex flex-col px-6;
+    background: transparent;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    justify-content: flex-start;
+  }
+
+  .ios-status {
+    @apply flex justify-center items-center;
+    padding-top: 8px;
+    padding-bottom: 7px;
+  }
+
+  .ios-status img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .ios-home-icons {
+    @apply grid grid-cols-3 gap-5;
+    margin-top: 7px;
+    flex: 1;
+    align-content: start;
+  }
+
+  .ios-app-icon {
+    @apply flex flex-col items-center gap-2 text-sm text-gray-800;
+  }
+
+  .ios-app-icon img {
+    @apply w-16 h-16 rounded-2xl shadow-xl object-cover;
+  }
+
+  .ios-dock {
+    @apply flex items-center justify-around bg-white/60 rounded-3xl p-3 border border-white/40 backdrop-blur-xl;
+    margin-top: auto;
+    margin-bottom: 8px;
+  }
+
+  .ios-dock img {
+    @apply w-12 h-12 object-contain;
+  }
+
+  .ios-shell .ios-screen {
+    @apply w-full h-full flex flex-col gap-6 px-5;
+    background: transparent;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .ios-header {
+    @apply flex items-center text-gray-500 text-xs;
+    padding-top: 8px;
+    position: relative;
+    min-height: 44px;
+  }
+
+  .ios-header button {
+    @apply text-blue-500 font-semibold;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+
+  .ios-header h2 {
+    @apply text-base font-semibold text-gray-800;
+    flex: 1;
+    text-align: left;
+    z-index: 1;
+  }
+
+  .ios-header img {
+    position: absolute;
+    left: 50%;
+    top: 8px;
+    transform: translateX(-50%);
+    max-width: 85%;
+    height: auto;
+    object-fit: contain;
+    z-index: 0;
+  }
+
+  .ios-list {
+    @apply bg-white rounded-3xl border border-gray-100 divide-y divide-gray-100 overflow-hidden;
+  }
+
+  .ios-list li {
+    @apply flex items-center gap-4 p-4 cursor-pointer;
+  }
+
+  .ios-list li div p {
+    @apply font-semibold text-gray-900;
+  }
+
+  .ios-list li div span {
+    @apply text-xs text-gray-500;
+  }
+
+  .ios-list.stacked li {
+    @apply flex-col items-start cursor-default;
+  }
+
+  .ios-list-icon img {
+    @apply w-14 h-14 object-contain;
+  }
+
+  .ios-inline-image {
+    @apply w-full rounded-2xl mt-3;
+  }
+
+  .ios-grid {
+    @apply grid grid-cols-3 gap-2;
+  }
+
+  .ios-grid img {
+    @apply rounded-2xl object-cover h-32 w-full;
+  }
+
+  .ios-blog-search input {
+    @apply w-full rounded-2xl border border-gray-200 px-4 py-3 text-sm;
+  }
+
+  .ios-card-stack {
+    @apply space-y-4;
+  }
+
+  .ios-card-stack li {
+    @apply bg-white rounded-3xl p-4 flex gap-4 border border-gray-50 shadow-sm;
+  }
+
+  .ios-card-stack img {
+    @apply w-20 h-20 rounded-2xl object-cover;
+  }
+
+  .ios-card-stack h3 {
+    @apply text-sm font-semibold text-gray-800;
+  }
+
+  .ios-card-stack a {
+    @apply text-blue-500 text-xs;
+  }
+
+  .ios-profile {
+    @apply flex flex-col items-center text-center gap-2;
+  }
+
+  .ios-profile img {
+    @apply w-24 h-24 rounded-full object-cover;
+  }
+
+  .ios-contact-actions {
+    @apply grid gap-3;
+  }
+
+  .ios-contact-actions .primary {
+    @apply bg-blue-500 text-white font-semibold rounded-2xl py-3;
+  }
+
+  .ios-contact-actions a {
+    @apply bg-gray-100 rounded-2xl py-3 text-center font-medium text-gray-700;
+  }
+
+  .ios-pill-grid {
+    @apply grid grid-cols-2 gap-3;
+  }
+
+  .ios-pill-grid li a {
+    @apply block rounded-2xl bg-white shadow-sm border border-gray-100 text-center py-3 text-sm font-medium;
+  }
+
+  .ios-notes {
+    @apply space-y-3 bg-white rounded-3xl p-4 border border-yellow-100;
+  }
+
+  .ios-notes article {
+    @apply flex flex-col;
+  }
+
+  .ios-notes p {
+    @apply text-xs uppercase tracking-wide text-gray-400;
+  }
+
+  .ios-notes span {
+    @apply text-sm text-gray-800;
+  }
+
+  .ios-resume {
+    @apply flex flex-col gap-4 items-center;
+  }
+
+  .ios-resume canvas {
+    @apply rounded-3xl shadow-lg;
+  }
+
+  .ios-resume a {
+    @apply text-blue-500 font-semibold;
+  }
+
+  .ios-about {
+    @apply space-y-4 bg-white rounded-3xl p-5 border border-gray-100;
+  }
+
+  .ios-about img {
+    @apply w-full rounded-2xl object-cover;
+  }
+
+  .ios-about ul {
+    @apply space-y-2 text-sm text-gray-700;
   }
 }
