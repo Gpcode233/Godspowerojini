@@ -110,7 +110,7 @@ const techStack = [
   },
   {
     category: "Styling",
-    items: ["Tailwind CSS", "Sass", "CSS", "Ant Design", "Shadcn UI"],
+    items: ["TailwindCSS", "Ant Design", "Shadcn UI"],
   },
   {
     category: "Backend",
