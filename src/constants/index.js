@@ -239,15 +239,15 @@ const WORK_LOCATION = {
           fileType: "txt",
           position: "top-5 left-10",
           description: [
-            "The Nike eCommerce website is a sleek and modern platform designed for shopping the latest Nike collections.",
-            "Instead of a simple online store, it delivers an immersive experience with bold visuals, interactive product displays, and smooth navigation.",
-            "Think of it like walking into a flagship Nike store—but right from your phone or laptop.",
-            "It's built with Next.js and Tailwind, ensuring fast performance, responsive design, and a clean, premium look.",
+            "Njem BRT is a modern bus route planning application designed to make transportation easier for commuters in Nigeria.",
+            "It features route previews, ticket verification, authentication pages, and a consistent, clean layout built with React Router and Tailwind CSS.",
+            "The project focuses heavily on user-friendly navigation and UI/UX improvements to make trip planning seamless and intuitive.",
+            "A live version is hosted on PythonAnywhere, and development is ongoing to improve performance, dark/light mode, and overall user experience.",
           ],
         },
         {
           id: 2,
-          name: "nike.com",
+          name: "Njem-BRT",
           icon: "/images/safari.png",
           kind: "file",
           fileType: "url",
@@ -292,10 +292,10 @@ const WORK_LOCATION = {
           fileType: "txt",
           position: "top-5 right-10",
           description: [
-            "AI Resume Analyzer is a smart tool that helps you perfect your resume with instant feedback.",
-            "Instead of guessing what recruiters want, you get AI-powered insights on keywords, formatting, and overall impact.",
-            "Think of it like having a career coach—pointing out strengths, fixing weaknesses, and boosting your chances of landing interviews.",
-            "It's built with Next.js and Tailwind, so it runs fast, looks professional, and works seamlessly on any device.",
+            "Cosmic DEX is a space-themed decentralized exchange built for the Umi Network Hackathon.",
+            "It features wallet connection using RainbowKit, a live swap interface, a portfolio dashboard, and an explore page showing cross-chain transaction activity.",
+            "The project is built with Next.js and Tailwind CSS, with plans to integrate real-time token data, better animations, and smoother blockchain interactions.",
+            "The goal is to create a visually immersive DEX that simplifies crypto swaps for both beginners and advanced users.",
           ],
         },
         {
@@ -345,10 +345,10 @@ const WORK_LOCATION = {
           fileType: "txt",
           position: "top-5 left-10",
           description: [
-            "Our Food Delivery App is a fast and convenient way to order meals from your favorite restaurants.",
-            "Instead of making calls or waiting in line, you can browse menus, customize orders, and track deliveries in real time.",
-            "Think of it like having your favorite restaurants in your pocket—ready to deliver anytime, anywhere.",
-            "It’s built with React Native, so it works smoothly on both iOS and Android with a clean, modern design.",
+            "DYTOR is a professional stage & event timer software for managing live productions, conferences, and media shows.",
+            "It offers millisecond-accurate timers, multi-device synchronization, role-based access (e.g. admin, speaker, controller), live message display and preset cues.",
+            "DYTOR lets teams coordinate schedules in real time — ideal for events, media houses, or churches needing precise control over show flow.",
+            "Plans include a free Starter option and paid tiers for teams needing remote dashboards, schedule automation, multi-device support, and exports. Perfect for productions and organized events."
           ],
         },
         {
@@ -357,7 +357,7 @@ const WORK_LOCATION = {
           icon: "/images/safari.png",
           kind: "file",
           fileType: "url",
-          href: "https://youtu.be/LKrX390fJMw?si=cExkuVhf2DTV9G2-",
+          href: "https://dytor.app",
           position: "top-10 right-20",
         },
         {
