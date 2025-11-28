@@ -27,13 +27,17 @@ const dockIcons = [
 ];
 
 const SectionHeader = ({ title, onBack }) => (
-  <header className="ios-header">
-    <button type="button" onClick={onBack}>
-      <ChevronLeft className="text-blue-500" />
-    </button>
-    <h2 className="text-blue-500">{title}</h2>
-    <img src="/images/ios/ios-statusbar.png" alt="status bar" />
-  </header>
+  <>
+    <div className="ios-status">
+      <img src="/images/ios/ios-statusbar.png" alt="status bar" />
+    </div>
+    <header className="ios-screen-header">
+      <button type="button" onClick={onBack}>
+        <ChevronLeft className="text-white" />
+      </button>
+      <h2>{title}</h2>
+    </header>
+  </>
 );
 
 const IOSMobile = () => {
@@ -100,21 +104,22 @@ const IOSMobile = () => {
   const renderWork = () => (
     <div className="ios-screen">
       <SectionHeader title="Work" onBack={goBack} />
+      <div className="ios-screen-body">
+        <ul className="ios-list">
+          {workProjects.map((project, idx) => (
+            <li key={project.id} onClick={() => openProject(project)}>
+              <div className="ios-list-icon">
+                <img src="/images/ios/ios-files.png" alt={project.name} />
+              </div>
 
-      <ul className="ios-list">
-        {workProjects.map((project, idx) => (
-          <li key={project.id} onClick={() => openProject(project)}>
-            <div className="ios-list-icon">
-              <img src="/images/ios/ios-files.png" alt={project.name} />
-            </div>
-
-            <div>
-              <p>{project.name}</p>
-              <span>{STATUS_TEXT[idx % STATUS_TEXT.length]}</span>
-            </div>
-          </li>
-        ))}
-      </ul>
+              <div>
+                <p>{project.name}</p>
+                <span>{STATUS_TEXT[idx % STATUS_TEXT.length]}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 
@@ -124,38 +129,39 @@ const IOSMobile = () => {
     return (
       <div className="ios-screen">
         <SectionHeader title={selectedProject.name} onBack={goBack} />
+        <div className="ios-screen-body">
+          <ul className="ios-list stacked">
+            {selectedProject.children?.map((item) => (
+              <li key={item.id}>
+                <div className="ios-list-icon">
+                  <img src={item.icon} alt={item.name} />
+                </div>
 
-        <ul className="ios-list stacked">
-          {selectedProject.children?.map((item) => (
-            <li key={item.id}>
-              <div className="ios-list-icon">
-                <img src={item.icon} alt={item.name} />
-              </div>
+                <div>
+                  <p>{item.name}</p>
 
-              <div>
-                <p>{item.name}</p>
+                  {item.fileType === "txt" && Array.isArray(item.description) ? (
+                    <span>{item.description[0]}</span>
+                  ) : null}
 
-                {item.fileType === "txt" && Array.isArray(item.description) ? (
-                  <span>{item.description[0]}</span>
-                ) : null}
+                  {item.fileType === "url" ? (
+                    <a href={item.href} target="_blank" rel="noopener noreferrer">
+                      Open link
+                    </a>
+                  ) : null}
 
-                {item.fileType === "url" ? (
-                  <a href={item.href} target="_blank" rel="noopener noreferrer">
-                    Open link
-                  </a>
-                ) : null}
-
-                {item.fileType === "img" ? (
-                  <img
-                    src={item.imageUrl}
-                    alt={item.name}
-                    className="ios-inline-image"
-                  />
-                ) : null}
-              </div>
-            </li>
-          ))}
-        </ul>
+                  {item.fileType === "img" ? (
+                    <img
+                      src={item.imageUrl}
+                      alt={item.name}
+                      className="ios-inline-image"
+                    />
+                  ) : null}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   };
@@ -163,11 +169,12 @@ const IOSMobile = () => {
   const renderPhotos = () => (
     <div className="ios-screen">
       <SectionHeader title="All Photos" onBack={goBack} />
-
-      <div className="ios-grid">
-        {gallery.map(({ id, img }) => (
-          <img key={id} src={img} alt={`Gallery ${id}`} />
-        ))}
+      <div className="ios-screen-body">
+        <div className="ios-grid">
+          {gallery.map(({ id, img }) => (
+            <img key={id} src={img} alt={`Gallery ${id}`} />
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -175,79 +182,82 @@ const IOSMobile = () => {
   const renderBlog = () => (
     <div className="ios-screen">
       <SectionHeader title="Safari" onBack={goBack} />
+      <div className="ios-screen-body">
+        <div className="ios-blog-search">
+          <input type="text" placeholder="Search or enter website name" />
+        </div>
 
-      <div className="ios-blog-search">
-        <input type="text" placeholder="Search or enter website name" />
+        <ul className="ios-card-stack">
+          {blogPosts.map(({ id, title, date, image, link }) => (
+            <li key={id}>
+              <img src={image} alt={title} />
+              <div>
+                <p>{date}</p>
+                <h3>{title}</h3>
+                <a href={link} target="_blank" rel="noopener noreferrer">
+                  Read more
+                </a>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
-
-      <ul className="ios-card-stack">
-        {blogPosts.map(({ id, title, date, image, link }) => (
-          <li key={id}>
-            <img src={image} alt={title} />
-            <div>
-              <p>{date}</p>
-              <h3>{title}</h3>
-              <a href={link} target="_blank" rel="noopener noreferrer">
-                Read more
-              </a>
-            </div>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 
   const renderContact = () => (
     <div className="ios-screen">
       <SectionHeader title="Contact Me" onBack={goBack} />
+      <div className="ios-screen-body">
+        <div className="ios-profile">
+          <img src="/images/godspower.jpg" alt="profile" />
+          <h3>Let&apos;s Connect</h3>
+          <p>Got an idea? Or just want to talk tech? I&apos;m in.</p>
+          <span>godspowerojini8@gmail.com</span>
+        </div>
 
-      <div className="ios-profile">
-        <img src="/images/godspower.jpg" alt="profile" />
-        <h3>Let&apos;s Connect</h3>
-        <p>Got an idea? Or just want to talk tech? I&apos;m in.</p>
-        <span>godspowerojini8@gmail.com</span>
+        <div className="ios-contact-actions">
+          <button type="button" className="primary">
+            Schedule a call
+          </button>
+          <a href="mailto:godspowerojini8@gmail.com">Email me</a>
+          <a href="https://x.com/Godspowerojini" target="_blank" rel="noopener noreferrer">
+            Twitter/X
+          </a>
+          <a
+            href="https://www.linkedin.com/company/javascriptmastery/posts/?feedView=all"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </a>
+        </div>
+
+        <ul className="ios-pill-grid">
+          {socials.map(({ id, text, link }) => (
+            <li key={id}>
+              <a href={link} target="_blank" rel="noopener noreferrer">
+                {text}
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
-
-      <div className="ios-contact-actions">
-        <button type="button" className="primary">
-          Schedule a call
-        </button>
-        <a href="mailto:godspowerojini8@gmail.com">Email me</a>
-        <a href="https://x.com/Godspowerojini" target="_blank" rel="noopener noreferrer">
-          Twitter/X
-        </a>
-        <a
-          href="https://www.linkedin.com/company/javascriptmastery/posts/?feedView=all"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          LinkedIn
-        </a>
-      </div>
-
-      <ul className="ios-pill-grid">
-        {socials.map(({ id, text, link }) => (
-          <li key={id}>
-            <a href={link} target="_blank" rel="noopener noreferrer">
-              {text}
-            </a>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 
   const renderNotes = () => (
     <div className="ios-screen">
       <SectionHeader title="Tech Stack" onBack={goBack} />
-
-      <div className="ios-notes">
-        {techStack.map(({ category, items }) => (
-          <article key={category}>
-            <p>{category}</p>
-            <span>{items.join(", ")}</span>
-          </article>
-        ))}
+      <div className="ios-screen-body">
+        <div className="ios-notes">
+          {techStack.map(({ category, items }) => (
+            <article key={category}>
+              <p>{category}</p>
+              <span>{items.join(", ")}</span>
+            </article>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -255,14 +265,15 @@ const IOSMobile = () => {
   const renderResume = () => (
     <div className="ios-screen">
       <SectionHeader title="Resume" onBack={goBack} />
-
-      <div className="ios-resume">
-        <Document file="files/resume.pdf">
-          <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
-        </Document>
-        <a href="files/resume.pdf" download>
-          Download Resume
-        </a>
+      <div className="ios-screen-body">
+        <div className="ios-resume">
+          <Document file="files/resume.pdf">
+            <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
+          </Document>
+          <a href="files/resume.pdf" download>
+            Download Resume
+          </a>
+        </div>
       </div>
     </div>
   );
@@ -270,18 +281,19 @@ const IOSMobile = () => {
   const renderAbout = () => (
     <div className="ios-screen">
       <SectionHeader title="About Me" onBack={goBack} />
+      <div className="ios-screen-body">
+        <div className="ios-about">
+          <img src="/images/godspower.jpg" alt="Godspower" />
+          <h3>{aboutFile?.subtitle ?? "Meet the Developer Behind the Code"}</h3>
 
-      <div className="ios-about">
-        <img src="/images/godspower.jpg" alt="Godspower" />
-        <h3>{aboutFile?.subtitle ?? "Meet the Developer Behind the Code"}</h3>
-
-        {Array.isArray(aboutFile?.description) ? (
-          <ul>
-            {aboutFile.description.map((line, idx) => (
-              <li key={idx}>{line}</li>
-            ))}
-          </ul>
-        ) : null}
+          {Array.isArray(aboutFile?.description) ? (
+            <ul>
+              {aboutFile.description.map((line, idx) => (
+                <li key={idx}>{line}</li>
+              ))}
+            </ul>
+          ) : null}
+        </div>
       </div>
     </div>
   );

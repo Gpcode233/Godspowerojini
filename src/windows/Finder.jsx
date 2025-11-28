@@ -54,7 +54,7 @@ const Finder = () => {
                     {renderList('My Projects', locations.work.children)}
                 </div>
 
-                <ul className='content'>
+                <ul className='content overflow-y-auto'>
                     {activeLocation?.children.map((item) => (
 
                         <li

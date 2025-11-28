@@ -22,7 +22,7 @@ const Resume = () => {
                 <h2>Resume.pdf</h2>
 
                 <a
-                    href="files/resume.pdf"
+                    href="files/Godspower-resume.pdf"
                     download className='cursor-pointer'
                     title='Download Resume'
                 >
@@ -30,9 +30,11 @@ const Resume = () => {
                 </a>
             </div>
 
-            <Document file="files/resume.pdf">
-                <Page pageNumber={1} renderTextLayer renderAnnotationLayer />
-            </Document>
+            <div className="flex flex-col flex-grow overflow-auto bg-white">
+                <Document file="files/Godspower-resume.pdf">
+                    <Page pageNumber={1} renderTextLayer renderAnnotationLayer />
+                </Document>
+            </div>
         </>
     )
 }

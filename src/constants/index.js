@@ -110,7 +110,7 @@ const techStack = [
   },
   {
     category: "Styling",
-    items: ["TailwindCSS", "Ant Design", "Shadcn UI"],
+    items: ["TailwindCSS", "CSS", "Ant Design", "Shadcn UI"],
   },
   {
     category: "Backend",
@@ -225,7 +225,7 @@ const WORK_LOCATION = {
     // ▶ Project 1
     {
       id: 5,
-      name: "Nike Ecommerce Website Application",
+      name: "Njem BRT",
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-10 left-5", // icon position inside Finder
@@ -233,7 +233,7 @@ const WORK_LOCATION = {
       children: [
         {
           id: 1,
-          name: "Nike Project.txt",
+          name: "Njem BRT Project.txt",
           icon: "/images/txt.png",
           kind: "file",
           fileType: "txt",
@@ -251,7 +251,7 @@ const WORK_LOCATION = {
           icon: "/images/safari.png",
           kind: "file",
           fileType: "url",
-          href: "https://youtu.be/fZdTYswuZjU?si=Awjl-pIst9e09_UU",
+          href: "https://bethel1889.pythonanywhere.com",
           position: "top-10 right-20",
         },
         {
@@ -278,7 +278,7 @@ const WORK_LOCATION = {
     // ▶ Project 2
     {
       id: 6,
-      name: "AI Resume Analyzer",
+      name: "Cosmic DEX",
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-52 right-80",
@@ -286,7 +286,7 @@ const WORK_LOCATION = {
       children: [
         {
           id: 1,
-          name: "AI Resume Analyzer Project.txt",
+          name: "Cosmic DEX Project.txt",
           icon: "/images/txt.png",
           kind: "file",
           fileType: "txt",
@@ -331,7 +331,7 @@ const WORK_LOCATION = {
     // ▶ Project 3
     {
       id: 7,
-      name: "Food Delivery App",
+      name: "DYTOR",
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-10 left-80",
@@ -339,7 +339,7 @@ const WORK_LOCATION = {
       children: [
         {
           id: 1,
-          name: "Food Delivery App Project.txt",
+          name: "DYTOR.txt",
           icon: "/images/txt.png",
           kind: "file",
           fileType: "txt",
@@ -375,7 +375,7 @@ const WORK_LOCATION = {
           icon: "/images/plain.png",
           kind: "file",
           fileType: "fig",
-          href: "https://google.com",
+          href: "https://dytor.app",
           position: "top-60 right-20",
         },
       ],
@@ -430,7 +430,7 @@ const ABOUT_LOCATION = {
         "Hey! I’m Godspower 👋, a Frontend Developer and SWE Major who enjoys building sleek, interactive websites that actually work well.",
         "I specialize in JavaScript, React, and Next.js and I love making things feel smooth, fast, and just a little bit delightful.",
         "I’m big on clean UI, good UX, and writing code that doesn’t need a search party to debug.",
-        "Outside of dev work, you'll find me tweaking layouts at 2AM, sipping overpriced coffee, or impulse-buying gadgets I absolutely convinced myself I needed 😅",
+        "Outside of dev work, you'll find me at Chess.com @ Gpcode233 😅",
       ],
     },
   ],

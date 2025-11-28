@@ -29,11 +29,47 @@ const WindowWrapper = (Component, windowKey) => {
             const el = ref.current;
             if (!el) return;
 
-            const [instance] = Draggable.create(el, { 
+            const [instance] = Draggable.create(el, {
                 onPress: () => focusWindow(windowKey)
-             });
+            });
 
-            return () => instance.kill();
+            const rightHandle = el.querySelector('.resize-handle-right');
+            const leftHandle = el.querySelector('.resize-handle-left');
+            const bottomHandle = el.querySelector('.resize-handle-bottom');
+
+            const resizeRight = rightHandle ? Draggable.create(rightHandle, {
+                type: 'x',
+                onPress: e => e.stopPropagation(),
+                onDrag: function () {
+                    gsap.set(el, { width: el.offsetWidth + this.deltaX });
+                }
+            })[0] : null;
+
+            const resizeLeft = leftHandle ? Draggable.create(leftHandle, {
+                type: 'x',
+                onPress: e => e.stopPropagation(),
+                onDrag: function () {
+                    gsap.set(el, {
+                        width: el.offsetWidth - this.deltaX,
+                        x: el._gsap.x + this.deltaX
+                    });
+                }
+            })[0] : null;
+
+            const resizeBottom = bottomHandle ? Draggable.create(bottomHandle, {
+                type: 'y',
+                onPress: e => e.stopPropagation(),
+                onDrag: function () {
+                    gsap.set(el, { height: el.offsetHeight + this.deltaY });
+                }
+            })[0] : null;
+
+            return () => {
+                instance.kill();
+                if (resizeRight) resizeRight.kill();
+                if (resizeLeft) resizeLeft.kill();
+                if (resizeBottom) resizeBottom.kill();
+            };
 
         }, []);
 
@@ -46,10 +82,17 @@ const WindowWrapper = (Component, windowKey) => {
         return <section
             id={windowKey}
             ref={ref}
-            style={{ zIndex }}
+            style={{
+                zIndex,
+                display: 'flex',
+                flexDirection: 'column'
+            }}
             className="absolute"
         >
             <Component {...props} />
+            <div className="resize-handle resize-handle-right"></div>
+            <div className="resize-handle resize-handle-bottom"></div>
+            <div className="resize-handle resize-handle-left"></div>
         </section>
     };
 

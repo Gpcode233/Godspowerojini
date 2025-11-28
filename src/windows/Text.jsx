@@ -20,10 +20,10 @@ const Text = () => {
         <h2>{name}</h2>
       </div>
 
-      <div className="p-5 space-y-6 bg-white">
+      <div className="flex flex-col flex-grow overflow-y-auto p-5 space-y-6 bg-white">
         {image ? (
           <div className="w-full">
-            <img src={image} alt={name} className="w-full h-auto rounded" />
+            <img src={image} alt={name} className="w-[50px] h-auto rounded-xl" />
           </div>
         ) : null}
 

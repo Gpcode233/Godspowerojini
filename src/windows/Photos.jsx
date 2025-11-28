@@ -18,7 +18,7 @@ const Photos = () => {
                 </div>
 
             </div>
-            <div className='flex w-full'>
+            <div className='flex w-full flex-1 min-h-0'>
                 <div className='sidebar'>
                     <h2>Photos</h2>
 
@@ -47,7 +47,7 @@ const Photos = () => {
                                         imageUrl: img,
                                     })}
                             >
-                                <img src={img} alt={'Gallery image ${id}'} />
+                                <img src={img} alt={`Gallery image ${id}`} />
                             </li>
                         ))}
                     </ul>
