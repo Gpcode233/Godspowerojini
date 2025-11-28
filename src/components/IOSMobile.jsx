@@ -202,7 +202,7 @@ const IOSMobile = () => {
       <SectionHeader title="Contact Me" onBack={goBack} />
 
       <div className="ios-profile">
-        <img src="/images/adrian.jpg" alt="profile" />
+        <img src="/images/godspower.jpg" alt="profile" />
         <h3>Let&apos;s Connect</h3>
         <p>Got an idea? Or just want to talk tech? I&apos;m in.</p>
         <span>godspowerojini8@gmail.com</span>
@@ -213,7 +213,7 @@ const IOSMobile = () => {
           Schedule a call
         </button>
         <a href="mailto:godspowerojini8@gmail.com">Email me</a>
-        <a href="https://x.com/jsmasterypro" target="_blank" rel="noopener noreferrer">
+        <a href="https://x.com/Godspowerojini" target="_blank" rel="noopener noreferrer">
           Twitter/X
         </a>
         <a
@@ -272,7 +272,7 @@ const IOSMobile = () => {
       <SectionHeader title="About Me" onBack={goBack} />
 
       <div className="ios-about">
-        <img src="/images/adrian.jpg" alt="Adrian" />
+        <img src="/images/godspower.jpg" alt="Godspower" />
         <h3>{aboutFile?.subtitle ?? "Meet the Developer Behind the Code"}</h3>
 
         {Array.isArray(aboutFile?.description) ? (

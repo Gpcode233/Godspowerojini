@@ -26,7 +26,7 @@ body {
     height: 100%;
   }
 
-@media (max-width: 600px) {
+@media (max-width: 679px) {
   body {
     background-image: url("/images/ios/ios-HomeScreenBackground.png");
     background-size: cover;
