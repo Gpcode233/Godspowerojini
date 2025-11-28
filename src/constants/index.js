@@ -401,7 +401,7 @@ const ABOUT_LOCATION = {
     },
     {
       id: 2,
-      name: "casual-me.png",
+      name: "conference-me.png",
       icon: "/images/image.png",
       kind: "file",
       fileType: "img",
@@ -410,7 +410,7 @@ const ABOUT_LOCATION = {
     },
     {
       id: 3,
-      name: "conference-me.png",
+      name: "casual-me.png",
       icon: "/images/image.png",
       kind: "file",
       fileType: "img",
