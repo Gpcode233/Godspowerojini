@@ -77,8 +77,8 @@ function Dock() {
     return (
         <section id='dock'>
             <div ref={dockRef} className='dock-container'>
-                {dockApps.map(({ id, name, icon, canOpen }) => (
-                    <div key={id ?? name} className='relative flex justify-center'>
+                {dockApps.map(({ id, name, icon, iconClass, canOpen }) => (
+                    <div key={id ?? name} className='relative flex flex-col items-center'>
                         <button
                             type='button'
                             className='dock-icon'
@@ -93,9 +93,12 @@ function Dock() {
                                 src={`/images/${icon}`}
                                 alt={name}
                                 loading='lazy'
-                                className={canOpen ? '' : "opacity-60"}
+                                className={`w-full h-full object-contain object-center ${iconClass ?? ''} ${canOpen ? '' : 'opacity-60'}`}
                             />
                         </button>
+                        {canOpen && windows[id]?.isOpen && (
+                            <span className="dock-dot" />
+                        )}
                     </div>
                 ))}
 

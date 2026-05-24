@@ -4,5 +4,6 @@ import Dock from "#components/Dock.jsx";
 import WindowControls from "#components/WindowControls.jsx";
 import Home from "./Home";
 import IOSMobile from "./IOSMobile.jsx";
+import Widgets from "./Widgets.jsx";
 
-export { Navbar, Welcome, Dock, WindowControls, Home, IOSMobile };
+export { Navbar, Welcome, Dock, WindowControls, Home, IOSMobile, Widgets };

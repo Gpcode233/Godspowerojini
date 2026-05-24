@@ -29,8 +29,11 @@ const WindowWrapper = (Component, windowKey) => {
             const el = ref.current;
             if (!el) return;
 
+            // Drag only from the window header — keeps inputs/textareas functional
+            const header = el.querySelector('#window-header');
             const [instance] = Draggable.create(el, {
-                onPress: () => focusWindow(windowKey)
+                trigger: header ?? el,
+                onPress: () => focusWindow(windowKey),
             });
 
             const rightHandle = el.querySelector('.resize-handle-right');

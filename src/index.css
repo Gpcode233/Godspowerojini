@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Georama:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Georama:ital,wght@0,100..900;1,100..900&family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
 
 @import "tailwindcss";
 
@@ -56,8 +56,14 @@ body {
 
 @theme {
   --font-georama: "Georama", sans-serif;
+  --font-inter: "Inter", sans-serif;
   --font-roboto: "Roboto Mono", monospace;
   --breakpoint-3xl: 1920px;
+}
+
+html, body, * {
+  font-family: "Inter", sans-serif;
+  letter-spacing: -0.025em;
 }
 
 @utility flex-center {
@@ -134,8 +140,12 @@ body {
       @apply size-14 3xl:size-20 cursor-pointer;
 
       img {
-        @apply object-cover object-center;
+        @apply w-full h-full object-contain object-center;
       }
+    }
+
+    .dock-dot {
+      @apply w-1 h-1 rounded-full bg-gray-400 mt-0.5;
     }
   }
 
@@ -201,6 +211,30 @@ body {
         }
       }
     }
+  }
+
+  /* Typewriter mask + cursor — shared across any t-line */
+  .t-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 800px; /* large fixed width — always covers full terminal line */
+    height: 100%;
+    background: white;
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  .t-cursor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: #1a1a1a;
+    z-index: 6;
+    opacity: 0;
+    pointer-events: none;
   }
 
   #terminal {
@@ -324,7 +358,8 @@ body {
   }
 
   #resume {
-    @apply w-fit h-fit absolute top-16 left-7/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-fit absolute top-16 left-7/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    max-height: 85vh;
 
     #window-header {
       h2 {
@@ -373,6 +408,185 @@ body {
         p {
           @apply text-sm text-center font-medium w-40;
         }
+      }
+    }
+  }
+
+  /* ── Desktop Widgets ── */
+  .desktop-widgets {
+    @apply absolute right-8 top-20 flex flex-col gap-3 z-10 select-none max-sm:hidden;
+  }
+
+  .widget {
+    @apply rounded-2xl overflow-hidden backdrop-blur-xl shadow-xl;
+    width: 329px;
+    height: 155px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .widget-dark {
+    background: rgba(28, 28, 30, 0.88);
+    @apply p-4;
+  }
+
+  .widget-github {
+    background: rgba(13, 17, 23, 0.92);
+    @apply px-4 pt-3 pb-2;
+  }
+
+  .widget-header {
+    @apply flex items-center gap-2 mb-2;
+  }
+
+  .widget-title {
+    @apply text-white text-xs font-semibold leading-tight block;
+  }
+
+  .widget-sub {
+    @apply text-[10px] leading-tight block;
+    color: #8b949e;
+  }
+
+  /* Clock */
+  .widget-clock-row {
+    @apply flex justify-between items-center flex-1;
+  }
+
+  .widget-clock-city {
+    @apply flex flex-col items-center gap-1;
+  }
+
+  .widget-city-name {
+    @apply text-[9px] font-medium;
+    color: #ebebf5cc;
+    letter-spacing: 0.02em;
+  }
+
+  .widget-city-time {
+    @apply text-[10px] font-semibold tabular-nums;
+    color: #ffffffcc;
+    letter-spacing: 0.02em;
+  }
+
+  /* GitHub */
+  .widget-contrib-grid {
+    @apply flex gap-[3px] flex-1 items-end;
+  }
+
+  .widget-contrib-col {
+    @apply flex flex-col gap-[3px];
+  }
+
+  .widget-contrib-cell {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+  }
+
+  .widget-contrib-legend {
+    @apply flex items-center gap-[3px] mt-1.5 justify-end;
+
+    span {
+      @apply text-[9px];
+      color: #8b949e;
+    }
+  }
+  /* ── End Widgets ── */
+
+  #mail {
+    @apply w-5xl absolute top-20 left-1/4 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+
+    h2 {
+      @apply font-bold text-sm text-center w-full;
+    }
+
+    .mail-body {
+      @apply flex;
+      height: 500px;
+    }
+
+    .mail-sidebar {
+      @apply w-48 bg-gray-50 border-r border-gray-200 flex flex-col p-3 overflow-y-auto flex-none;
+    }
+
+    .mail-sidebar-group {
+      @apply mb-3;
+    }
+
+    .mail-sidebar-label {
+      @apply text-[10px] font-semibold text-gray-400 uppercase tracking-wider px-2 mb-1;
+    }
+
+    .mail-sidebar-item {
+      @apply flex items-center gap-2 w-full text-left px-3 py-1.5 rounded-md text-sm text-gray-700 hover:bg-gray-200 transition-colors;
+    }
+
+    .mail-sidebar-active {
+      @apply bg-blue-100 text-blue-700;
+    }
+
+    .mail-list {
+      @apply w-56 border-r border-gray-200 flex flex-col bg-white flex-none;
+    }
+
+    .mail-list-header {
+      @apply px-4 py-3 border-b border-gray-200 font-semibold text-sm text-gray-800 bg-gray-50;
+    }
+
+    .mail-list-empty {
+      @apply flex-1 flex flex-col items-center justify-center text-gray-400 text-sm;
+    }
+
+    .mail-compose-pane {
+      @apply flex-1 flex flex-col min-w-0;
+    }
+
+    .mail-compose-top {
+      @apply px-5 py-3 border-b border-gray-200 bg-gray-50;
+
+      h3 {
+        @apply font-semibold text-sm text-gray-700;
+      }
+    }
+
+    .mail-form {
+      @apply flex flex-col flex-1 px-5 pt-2 pb-4;
+    }
+
+    .mail-field {
+      @apply flex items-center border-b border-gray-100 py-2 gap-3;
+
+      label {
+        @apply text-sm text-gray-400 w-16 flex-none;
+      }
+
+      input {
+        @apply flex-1 text-sm text-gray-800 outline-none bg-transparent placeholder:text-gray-300;
+
+        &[readonly] {
+          @apply text-gray-500 cursor-default;
+        }
+      }
+    }
+
+    .mail-textarea {
+      @apply flex-1 w-full text-sm text-gray-800 outline-none resize-none mt-3 placeholder:text-gray-300 min-h-[120px];
+    }
+
+    .mail-form-footer {
+      @apply flex items-center justify-between pt-3 border-t border-gray-100 mt-2;
+
+      .mail-send-btn {
+        @apply bg-blue-500 hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-semibold px-6 py-2 rounded-full transition-colors cursor-pointer;
+      }
+
+      .mail-status-ok {
+        @apply text-green-600 text-xs font-medium;
+      }
+
+      .mail-status-err {
+        @apply text-red-500 text-xs font-medium;
       }
     }
   }

@@ -67,6 +67,13 @@ const dockApps = [
     canOpen: true,
   },
   {
+    id: "mail",
+    name: "Mail",
+    icon: "mail.png",
+    iconClass: "scale-[0.78]",
+    canOpen: true,
+  },
+  {
     id: "trash",
     name: "Archive", // was "Trash"
     icon: "trash.png",
@@ -190,14 +197,14 @@ const gallery = [
     id: 1,
     img: "/images/gal1.png",
   },
-  // {
-  //   id: 2,
-  //   img: "/images/gal2.png",
-  // },
-  // {
-  //   id: 3,
-  //   img: "/images/gal3.png",
-  // },
+  {
+    id: 2,
+   img: "/images/gal2.jpg",
+  },
+  {
+    id: 3,
+    img: "/images/gal3.jpg",
+  },
   // {
   //   id: 4,
   //   img: "/images/gal4.png",
@@ -324,6 +331,32 @@ const WORK_LOCATION = {
           fileType: "fig",
           href: "https://google.com",
           position: "top-60 left-5",
+        },
+      ],
+    },
+
+    // ▶ Project 4
+    {
+      id: 8,
+      name: "Ajently",
+      icon: "/images/folder.png",
+      kind: "folder",
+      position: "top-52 left-5",
+      windowPosition: "top-[45vh] left-7",
+      children: [
+        {
+          id: 1,
+          name: "Ajently.txt",
+          icon: "/images/txt.png",
+          kind: "file",
+          fileType: "txt",
+          position: "top-5 left-10",
+          description: [
+            "Ajently is an AI-powered automation platform designed to handle tasks for individuals and businesses — from scheduling and research to content workflows and beyond.",
+            "Built by Godspower Ojini and his team, Ajently won the N2.7 million prize at the Enugu State Tech Festival (March 2026), competing against student teams across Nigeria.",
+            "The platform aims to reduce repetitive manual work by letting users delegate tasks to AI agents that operate autonomously on their behalf.",
+            "The team is actively scaling Ajently into a globally accessible product, with plans for expanded integrations and a public release.",
+          ],
         },
       ],
     },
@@ -499,6 +532,7 @@ const WINDOW_CONFIG = {
   safari: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   photos: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   terminal: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
+  mail: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   txtfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   imgfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
 };
