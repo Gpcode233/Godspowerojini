@@ -152,6 +152,10 @@ html, body, * {
   #window-controls {
     @apply flex gap-2;
 
+    button {
+      @apply border-0 p-0 relative;
+    }
+
     .close {
       @apply size-3.5 rounded-full bg-[#ff6157] cursor-pointer;
     }
@@ -161,7 +165,7 @@ html, body, * {
     }
 
     .maximize {
-      @apply size-3.5 rounded-full bg-[#2acb42];
+      @apply size-3.5 rounded-full bg-[#2acb42] cursor-pointer;
     }
   }
 
@@ -889,4 +893,1678 @@ html, body, * {
   .ios-about ul {
     @apply space-y-2 text-sm text-gray-700;
   }
+}
+
+/* Chess app */
+.window-maximized {
+  position: fixed !important;
+  inset: 38px 10px 10px !important;
+  width: auto !important;
+  height: auto !important;
+  transform: none !important;
+  max-width: none !important;
+  max-height: none !important;
+}
+
+#chess {
+  width: min(1060px, calc(100vw - 48px));
+  height: min(760px, calc(100vh - 104px));
+  min-width: 760px;
+  min-height: 580px;
+  top: 8vh;
+  left: max(24px, calc(50vw - 530px));
+  border: 1px solid oklch(0.98 0.006 78 / 0.72);
+  border-radius: 14px;
+  overflow: hidden;
+  background: oklch(0.97 0.008 75 / 0.78);
+  box-shadow:
+    0 36px 80px oklch(0.17 0.02 50 / 0.36),
+    0 5px 18px oklch(0.17 0.02 50 / 0.2);
+  backdrop-filter: blur(20px) saturate(1.18);
+}
+
+#chess.window-maximized {
+  min-width: 0;
+  min-height: 0;
+}
+
+.chess-app {
+  --chess-ink: oklch(0.22 0.018 64);
+  --chess-muted: oklch(0.48 0.018 65);
+  --chess-line: oklch(0.79 0.016 70 / 0.64);
+  --chess-paper: oklch(0.97 0.012 78 / 0.78);
+  --chess-accent: oklch(0.52 0.1 58);
+  width: 100%;
+  height: 100%;
+  color: var(--chess-ink);
+  background:
+    radial-gradient(circle at 12% 8%, oklch(0.99 0.025 84 / 0.84), transparent 33%),
+    linear-gradient(135deg, oklch(0.96 0.012 74 / 0.9), oklch(0.9 0.025 70 / 0.82));
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+}
+
+.chess-loading {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+  place-items: center;
+  color: oklch(0.92 0.025 78);
+  background: oklch(0.29 0.035 60 / 0.92);
+}
+
+.chess-loading span {
+  font-size: 54px;
+  animation: chess-pulse 1.2s ease-in-out infinite;
+}
+
+.chess-header {
+  height: 54px;
+  min-height: 54px;
+  padding: 0 16px !important;
+  border-bottom: 1px solid var(--chess-line) !important;
+  border-radius: 0 !important;
+  background: oklch(0.97 0.008 78 / 0.72) !important;
+  color: var(--chess-ink) !important;
+  backdrop-filter: blur(20px);
+}
+
+.chess-header-leading,
+.chess-app-identity,
+.chess-app-identity > span:last-child,
+.chess-engine-state {
+  display: flex;
+  align-items: center;
+}
+
+.chess-header-leading {
+  gap: 22px;
+}
+
+.chess-app-identity {
+  gap: 9px;
+}
+
+.chess-app-identity > span:last-child {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.chess-app-identity strong {
+  font-size: 13px;
+  line-height: 1.1;
+  font-weight: 650;
+}
+
+.chess-app-identity small {
+  color: var(--chess-muted);
+  font-size: 9px;
+  line-height: 1.1;
+  text-transform: capitalize;
+}
+
+.chess-app-glyph {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  color: oklch(0.92 0.02 74);
+  border-radius: 7px;
+  background: oklch(0.27 0.025 62);
+  box-shadow: inset 0 1px 0 oklch(0.8 0.02 70 / 0.2);
+  font-size: 19px;
+}
+
+.chess-header-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.chess-engine-state {
+  gap: 7px;
+  padding: 6px 9px;
+  color: var(--chess-muted);
+  border: 1px solid oklch(0.75 0.018 70 / 0.6);
+  border-radius: 999px;
+  background: oklch(0.99 0.006 76 / 0.58);
+  font-size: 10px;
+}
+
+.chess-engine-state i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: oklch(0.68 0.14 148);
+}
+
+.chess-engine-state.is-thinking i {
+  animation: chess-pulse 1s ease-in-out infinite;
+  background: oklch(0.72 0.14 78);
+}
+
+.chess-game {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 270px;
+  height: calc(100% - 54px);
+  min-height: 0;
+}
+
+.chess-main {
+  min-width: 0;
+  min-height: 0;
+  padding: clamp(14px, 2.4vh, 22px) clamp(18px, 2.8vw, 32px);
+  overflow: auto;
+}
+
+.chess-status-wrap {
+  width: min(100%, 610px);
+  min-height: 48px;
+  margin: 0 auto 10px;
+}
+
+.chess-status {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 11px;
+  color: var(--chess-ink);
+  border: 1px solid oklch(0.78 0.02 70 / 0.56);
+  border-radius: 10px;
+  background: oklch(0.98 0.01 78 / 0.58);
+}
+
+.chess-status.is-check {
+  border-color: oklch(0.68 0.14 33 / 0.58);
+  background: oklch(0.93 0.055 36 / 0.72);
+  animation: chess-check-pulse 1.6s ease-in-out infinite;
+}
+
+.chess-status.is-terminal {
+  color: oklch(0.24 0.045 79);
+  border-color: oklch(0.67 0.09 83 / 0.7);
+  background: oklch(0.91 0.08 86 / 0.74);
+}
+
+.chess-status.is-review {
+  background: oklch(0.93 0.035 248 / 0.72);
+  border-color: oklch(0.68 0.08 248 / 0.48);
+}
+
+.chess-status-icon {
+  display: grid;
+  width: 25px;
+  height: 25px;
+  flex: 0 0 auto;
+  place-items: center;
+  color: var(--chess-accent);
+  border-radius: 7px;
+  background: oklch(0.99 0.008 75 / 0.68);
+  font-size: 8px;
+}
+
+.chess-status > span:nth-child(2) {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+}
+
+.chess-status strong {
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.chess-status small {
+  color: var(--chess-muted);
+  font-size: 9px;
+  line-height: 1.3;
+}
+
+.chess-status button {
+  padding: 5px 8px;
+  color: oklch(0.43 0.11 250);
+  border: 0;
+  border-radius: 6px;
+  background: oklch(0.98 0.01 250 / 0.78);
+  font-size: 9px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.chess-board-stage {
+  width: min(100%, 610px);
+  margin: 0 auto;
+}
+
+.chess-board-shell {
+  position: relative;
+  width: min(100%, 560px, calc(100vh - 330px));
+  margin: 0 auto;
+  isolation: isolate;
+}
+
+.chess-board-shell [data-square] {
+  transition: background-color 150ms ease;
+}
+
+.chess-player {
+  display: flex;
+  width: min(100%, 560px);
+  align-items: center;
+  gap: 9px;
+  margin-inline: auto;
+  padding: 7px 2px;
+}
+
+.chess-player > span:nth-child(2) {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.chess-player strong {
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.chess-player small {
+  color: var(--chess-muted);
+  font-size: 9px;
+  text-transform: capitalize;
+}
+
+.chess-avatar {
+  display: grid;
+  width: 29px;
+  height: 29px;
+  place-items: center;
+  color: oklch(0.27 0.025 63);
+  border: 1px solid oklch(0.75 0.025 75);
+  border-radius: 8px;
+  background: oklch(0.96 0.018 79);
+  font-size: 19px;
+}
+
+.chess-avatar.is-computer {
+  color: oklch(0.91 0.018 77);
+  border-color: oklch(0.32 0.025 63);
+  background: oklch(0.27 0.025 63);
+}
+
+.chess-turn-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: oklch(0.66 0.14 146);
+  box-shadow: 0 0 0 3px oklch(0.66 0.14 146 / 0.14);
+}
+
+.chess-thinking-dots {
+  display: flex;
+  gap: 3px;
+  padding-right: 5px;
+}
+
+.chess-thinking-dots b {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--chess-muted);
+  animation: chess-thinking 1s ease-in-out infinite;
+}
+
+.chess-thinking-dots b:nth-child(2) { animation-delay: 140ms; }
+.chess-thinking-dots b:nth-child(3) { animation-delay: 280ms; }
+
+.chess-sidebar {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  flex-direction: column;
+  border-left: 1px solid var(--chess-line);
+  background: oklch(0.96 0.01 75 / 0.64);
+  backdrop-filter: blur(20px);
+}
+
+.chess-history {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  padding-top: 16px;
+}
+
+.chess-panel-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px 12px;
+}
+
+.chess-panel-title > span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.chess-panel-title small {
+  min-width: 22px;
+  padding: 2px 6px;
+  color: var(--chess-muted);
+  border-radius: 999px;
+  background: oklch(0.85 0.015 72 / 0.62);
+  text-align: center;
+  font-size: 9px;
+}
+
+.chess-history-heading,
+.chess-history-list li {
+  display: grid;
+  grid-template-columns: 34px 1fr 1fr;
+  align-items: center;
+}
+
+.chess-history-heading {
+  padding: 7px 12px;
+  color: var(--chess-muted);
+  border-block: 1px solid var(--chess-line);
+  background: oklch(0.91 0.012 74 / 0.48);
+  font-size: 9px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.chess-history-list {
+  min-height: 0;
+  flex: 1;
+  padding: 5px 8px 12px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.chess-history-list li {
+  min-height: 32px;
+}
+
+.chess-history-list li > span:first-child {
+  padding-left: 7px;
+  color: var(--chess-muted);
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+}
+
+.chess-history-list button {
+  min-width: 0;
+  padding: 6px 8px;
+  overflow: hidden;
+  color: var(--chess-ink);
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  text-align: left;
+  text-overflow: ellipsis;
+  font-size: 11px;
+  font-weight: 550;
+  cursor: pointer;
+}
+
+.chess-history-list button:hover,
+.chess-history-list button:focus-visible {
+  background: oklch(0.87 0.025 77 / 0.72);
+  outline: none;
+}
+
+.chess-history-list button.is-active {
+  color: oklch(0.98 0.006 76);
+  background: var(--chess-accent);
+}
+
+.chess-history-empty {
+  display: flex !important;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  color: var(--chess-muted);
+  text-align: center;
+  font-size: 10px;
+}
+
+.chess-history-empty span {
+  color: oklch(0.56 0.035 68);
+  font-size: 32px !important;
+}
+
+.chess-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  padding: 12px;
+  border-top: 1px solid var(--chess-line);
+}
+
+.chess-controls button {
+  display: flex;
+  min-height: 34px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--chess-ink);
+  border: 1px solid oklch(0.76 0.02 70 / 0.72);
+  border-radius: 8px;
+  background: oklch(0.99 0.006 77 / 0.68);
+  box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.68);
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chess-controls button:hover:not(:disabled) {
+  background: oklch(0.94 0.018 76);
+}
+
+.chess-controls button:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.chess-controls .is-emphasized {
+  grid-column: 1 / -1;
+  color: oklch(0.98 0.006 77);
+  border-color: oklch(0.42 0.07 58);
+  background: oklch(0.37 0.06 58);
+}
+
+.chess-promotion {
+  position: absolute;
+  z-index: 20;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  background: oklch(0.2 0.02 60 / 0.46);
+  backdrop-filter: blur(8px);
+}
+
+.chess-promotion > div {
+  width: min(280px, 90%);
+  padding: 18px;
+  border: 1px solid oklch(0.98 0.008 77 / 0.72);
+  border-radius: 12px;
+  background: oklch(0.96 0.018 78 / 0.94);
+  box-shadow: 0 18px 45px oklch(0.18 0.02 60 / 0.32);
+  text-align: center;
+}
+
+.chess-promotion strong {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.chess-promotion > div > div {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.chess-promotion > div > div button {
+  aspect-ratio: 1;
+  color: var(--chess-ink);
+  border: 1px solid var(--chess-line);
+  border-radius: 8px;
+  background: oklch(0.99 0.005 78);
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.chess-promotion > div > div button:hover,
+.chess-promotion > div > div button:focus-visible {
+  border-color: var(--chess-accent);
+  outline: 2px solid oklch(0.52 0.1 58 / 0.24);
+}
+
+.chess-promotion-cancel {
+  margin-top: 10px;
+  color: var(--chess-muted);
+  border: 0;
+  background: transparent;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.chess-gameover-glow {
+  position: absolute;
+  z-index: -1;
+  inset: -10px;
+  border: 2px solid oklch(0.76 0.12 85 / 0.74);
+  border-radius: 16px;
+  box-shadow: 0 0 32px oklch(0.76 0.12 85 / 0.35);
+  pointer-events: none;
+}
+
+.chess-onboarding {
+  display: grid;
+  height: calc(100% - 54px);
+  place-items: center;
+  padding: 24px;
+  overflow-y: auto;
+  background:
+    radial-gradient(circle at 72% 22%, oklch(0.79 0.07 74 / 0.22), transparent 26%),
+    radial-gradient(circle at 24% 78%, oklch(0.45 0.04 60 / 0.11), transparent 30%);
+}
+
+.chess-onboarding-card {
+  display: grid;
+  width: min(100%, 620px);
+  grid-template-columns: 112px 1fr;
+  gap: 20px 26px;
+  padding: 28px;
+  border: 1px solid oklch(0.99 0.008 78 / 0.76);
+  border-radius: 18px;
+  background: oklch(0.97 0.012 78 / 0.72);
+  box-shadow:
+    0 28px 70px oklch(0.18 0.02 60 / 0.2),
+    inset 0 1px 0 oklch(1 0 0 / 0.7);
+  backdrop-filter: blur(22px);
+}
+
+.chess-onboarding-mark {
+  display: grid;
+  grid-row: 1 / span 2;
+  min-height: 150px;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 14px;
+  background:
+    linear-gradient(145deg, oklch(0.34 0.045 58), oklch(0.2 0.025 58));
+  box-shadow: inset 0 1px 0 oklch(0.7 0.025 70 / 0.22);
+}
+
+.chess-onboarding-mark span {
+  color: oklch(0.9 0.04 79);
+  filter: drop-shadow(0 8px 8px oklch(0.1 0.02 50 / 0.36));
+  font-size: 76px;
+  transform: rotate(-5deg);
+}
+
+.chess-onboarding-copy {
+  align-self: end;
+}
+
+.chess-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 5px;
+  color: var(--chess-accent);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.chess-onboarding h1 {
+  font-size: 28px;
+  line-height: 1.05;
+  font-weight: 680;
+  letter-spacing: -0.045em;
+}
+
+.chess-onboarding-copy p {
+  max-width: 38ch;
+  margin-top: 7px;
+  color: var(--chess-muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.chess-choice-group {
+  grid-column: 2;
+  border: 0;
+}
+
+.chess-choice-group legend {
+  margin-bottom: 8px;
+  color: var(--chess-muted);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.chess-choice-group input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.chess-segmented {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 4px;
+  border: 1px solid var(--chess-line);
+  border-radius: 10px;
+  background: oklch(0.88 0.016 73 / 0.5);
+}
+
+.chess-segmented label {
+  display: flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 7px;
+  color: var(--chess-muted);
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chess-segmented label.is-selected {
+  color: var(--chess-ink);
+  background: oklch(0.99 0.006 77 / 0.88);
+  box-shadow: 0 2px 8px oklch(0.2 0.02 60 / 0.1);
+}
+
+.chess-side-piece {
+  font-size: 21px;
+  line-height: 1;
+}
+
+.chess-side-piece.is-black { color: oklch(0.2 0.02 60); }
+.chess-side-piece.is-white {
+  color: oklch(0.98 0.006 78);
+  text-shadow: 0 0 1px oklch(0.2 0.02 60), 0 1px 2px oklch(0.2 0.02 60 / 0.35);
+}
+
+.chess-difficulty-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.chess-difficulty-list label {
+  position: relative;
+  display: flex;
+  min-height: 60px;
+  align-items: center;
+  gap: 8px;
+  padding: 9px;
+  border: 1px solid var(--chess-line);
+  border-radius: 9px;
+  background: oklch(0.99 0.006 77 / 0.52);
+  cursor: pointer;
+}
+
+.chess-difficulty-list label.is-selected {
+  border-color: oklch(0.52 0.1 58 / 0.72);
+  background: oklch(0.94 0.04 72 / 0.76);
+  box-shadow: 0 0 0 2px oklch(0.52 0.1 58 / 0.11);
+}
+
+.chess-difficulty-list label > span:nth-child(3) {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+}
+
+.chess-difficulty-list strong {
+  font-size: 10px;
+}
+
+.chess-difficulty-list small {
+  color: var(--chess-muted);
+  font-size: 8px;
+  line-height: 1.25;
+}
+
+.chess-radio-dot {
+  width: 10px;
+  height: 10px;
+  flex: 0 0 auto;
+  border: 1px solid oklch(0.62 0.025 70);
+  border-radius: 50%;
+}
+
+.is-selected .chess-radio-dot {
+  border: 3px solid var(--chess-accent);
+}
+
+.chess-difficulty-list svg {
+  color: oklch(0.54 0.04 65);
+}
+
+.chess-onboarding-actions {
+  display: flex;
+  grid-column: 2;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.chess-button {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 15px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.chess-button.is-primary {
+  color: oklch(0.98 0.006 77);
+  border: 1px solid oklch(0.35 0.06 58);
+  background: oklch(0.35 0.055 58);
+  box-shadow: inset 0 1px 0 oklch(0.72 0.03 70 / 0.28), 0 4px 10px oklch(0.25 0.04 58 / 0.18);
+}
+
+.chess-button.is-primary:hover {
+  background: oklch(0.3 0.05 58);
+}
+
+.chess-button.is-secondary {
+  color: var(--chess-ink);
+  border: 1px solid var(--chess-line);
+  background: oklch(0.99 0.006 77 / 0.68);
+}
+
+.chess-button:focus-visible,
+.chess-controls button:focus-visible,
+.chess-status button:focus-visible {
+  outline: 2px solid oklch(0.5 0.12 250 / 0.62);
+  outline-offset: 2px;
+}
+
+.dock-dot.is-minimized {
+  opacity: 0.45;
+}
+
+.ios-chess-screen {
+  background: oklch(0.91 0.025 72);
+}
+
+.chess-app--mobile {
+  min-height: 100%;
+  background: linear-gradient(145deg, oklch(0.95 0.018 78), oklch(0.88 0.035 68));
+}
+
+.chess-app--mobile .chess-header {
+  position: sticky;
+  z-index: 10;
+  top: 0;
+}
+
+@keyframes chess-pulse {
+  50% { transform: scale(1.5); opacity: 0.56; }
+}
+
+@keyframes chess-check-pulse {
+  50% { box-shadow: 0 0 0 4px oklch(0.65 0.15 32 / 0.08); }
+}
+
+@keyframes chess-thinking {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.38; }
+  30% { transform: translateY(-3px); opacity: 1; }
+}
+
+@media (max-height: 720px) and (min-width: 680px) {
+  #chess {
+    top: 52px;
+    height: calc(100vh - 120px);
+    min-height: 520px;
+  }
+
+  .chess-main {
+    padding-block: 10px;
+  }
+
+  .chess-player {
+    padding-block: 4px;
+  }
+}
+
+@media (max-width: 900px) and (min-width: 680px) {
+  #chess {
+    left: 20px;
+    width: calc(100vw - 40px);
+    min-width: 0;
+  }
+
+  .chess-game {
+    grid-template-columns: minmax(0, 1fr) 230px;
+  }
+}
+
+@media (max-width: 679px) {
+  .chess-app--mobile {
+    height: 100dvh;
+    overflow-y: auto;
+  }
+
+  .chess-app--mobile .chess-header {
+    height: 56px;
+    min-height: 56px;
+    padding-inline: 14px !important;
+  }
+
+  .chess-app--mobile .chess-game {
+    display: flex;
+    height: auto;
+    min-height: calc(100dvh - 56px);
+    flex-direction: column;
+  }
+
+  .chess-app--mobile .chess-main {
+    padding: 12px;
+    overflow: visible;
+  }
+
+  .chess-app--mobile .chess-board-shell {
+    width: 100%;
+  }
+
+  .chess-app--mobile .chess-status-wrap {
+    margin-bottom: 6px;
+  }
+
+  .chess-app--mobile .chess-sidebar {
+    min-height: 320px;
+    border-top: 1px solid var(--chess-line);
+    border-left: 0;
+  }
+
+  .chess-app--mobile .chess-history {
+    min-height: 230px;
+  }
+
+  .chess-app--mobile .chess-history-list {
+    max-height: 260px;
+  }
+
+  .chess-app--mobile .chess-onboarding {
+    min-height: calc(100dvh - 56px);
+    height: auto;
+    padding: 18px 14px 30px;
+  }
+
+  .chess-app--mobile .chess-onboarding-card {
+    display: flex;
+    max-width: 430px;
+    flex-direction: column;
+    gap: 18px;
+    padding: 20px;
+  }
+
+  .chess-app--mobile .chess-onboarding-mark {
+    min-height: 104px;
+  }
+
+  .chess-app--mobile .chess-onboarding-mark span {
+    font-size: 62px;
+  }
+
+  .chess-app--mobile .chess-choice-group,
+  .chess-app--mobile .chess-onboarding-actions {
+    width: 100%;
+  }
+
+  .chess-app--mobile .chess-difficulty-list {
+    grid-template-columns: 1fr;
+  }
+
+  .chess-app--mobile .chess-difficulty-list label {
+    min-height: 52px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chess-app *,
+  .chess-app *::before,
+  .chess-app *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .chess-app {
+    --chess-ink: oklch(0.12 0.01 60);
+    --chess-muted: oklch(0.28 0.01 60);
+    --chess-line: oklch(0.35 0.02 60);
+  }
+
+  .chess-status,
+  .chess-controls button,
+  .chess-difficulty-list label {
+    border-width: 2px;
+  }
+}
+
+/* Refined iOS mobile shell */
+@media (max-width: 679px) {
+  html,
+  body,
+  #root {
+    width: 100%;
+    min-width: 320px;
+    height: 100%;
+    min-height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: #233563;
+    background-position: center;
+  }
+
+  .ios-shell {
+    display: block;
+    width: 100%;
+    height: 100dvh;
+    padding: 0;
+    color: #111114;
+    background: #f2f2f7;
+  }
+
+  .ios-device {
+    width: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    background: #f2f2f7;
+  }
+
+  .ios-home {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100dvh;
+    min-height: 600px;
+    flex-direction: column;
+    padding:
+      calc(env(safe-area-inset-top, 0px) + 62px)
+      18px
+      calc(env(safe-area-inset-bottom, 0px) + 14px);
+    overflow: hidden;
+    background:
+      linear-gradient(180deg, rgb(16 29 62 / 0.05), rgb(9 18 44 / 0.18)),
+      url("/images/ios/ios-HomeScreenBackground.png") center / cover no-repeat;
+  }
+
+  .ios-home::before {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 72% 12%, rgb(153 190 255 / 0.22), transparent 31%),
+      linear-gradient(180deg, transparent 60%, rgb(5 11 29 / 0.16));
+    content: "";
+    pointer-events: none;
+  }
+
+  .ios-status {
+    position: absolute;
+    z-index: 40;
+    top: env(safe-area-inset-top, 0px);
+    right: 0;
+    left: 0;
+    display: grid;
+    width: 100%;
+    height: 48px;
+    grid-template-columns: 1fr 120px 1fr;
+    align-items: center;
+    padding: 0 22px;
+    color: #f8f8fb;
+    background: transparent;
+    font-size: 15px;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+
+  .ios-status.is-dark {
+    position: absolute;
+    color: #111114;
+  }
+
+  .ios-status time {
+    justify-self: start;
+  }
+
+  .ios-status-signals {
+    display: flex;
+    align-items: center;
+    justify-self: end;
+    gap: 5px;
+  }
+
+  .ios-dynamic-island {
+    width: 116px;
+    height: 31px;
+    justify-self: center;
+    border-radius: 999px;
+    background: #050506;
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.04);
+  }
+
+  .ios-widget-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 0.85fr 1.65fr;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .ios-date-widget,
+  .ios-profile-widget {
+    min-height: 126px;
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 0.28);
+    border-radius: 24px;
+    box-shadow:
+      0 10px 32px rgb(4 10 29 / 0.18),
+      inset 0 1px 0 rgb(255 255 255 / 0.24);
+    backdrop-filter: blur(24px) saturate(1.25);
+  }
+
+  .ios-date-widget {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 16px;
+    color: #f7f8fc;
+    background: rgb(20 34 67 / 0.52);
+  }
+
+  .ios-date-widget span {
+    color: #ff786f;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .ios-date-widget strong {
+    margin-block: 0 1px;
+    font-size: 46px;
+    line-height: 1;
+    font-weight: 350;
+    letter-spacing: -0.06em;
+  }
+
+  .ios-date-widget p {
+    color: rgb(247 248 252 / 0.74);
+    font-size: 12px;
+  }
+
+  .ios-profile-widget {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 14px;
+    color: #f8f8fb;
+    background: rgb(18 28 54 / 0.64);
+  }
+
+  .ios-profile-widget::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgb(8 15 34 / 0.8), rgb(8 15 34 / 0.1));
+    content: "";
+  }
+
+  .ios-profile-widget img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 26%;
+    filter: saturate(0.86);
+  }
+
+  .ios-profile-widget div {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ios-profile-widget span {
+    margin-bottom: 2px;
+    color: rgb(248 248 251 / 0.7);
+    font-size: 9px;
+    font-weight: 650;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .ios-profile-widget strong {
+    font-size: 15px;
+    line-height: 1.15;
+    font-weight: 650;
+  }
+
+  .ios-profile-widget p {
+    margin-top: 4px;
+    color: rgb(248 248 251 / 0.75);
+    font-size: 9px;
+    line-height: 1.25;
+  }
+
+  .ios-home-icons {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    flex: 0;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-content: start;
+    gap: 22px 12px;
+    margin: 0;
+  }
+
+  .ios-app-icon {
+    display: flex;
+    min-width: 0;
+    min-height: 76px;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0;
+    color: #f8f8fb;
+    border: 0;
+    background: transparent;
+    text-shadow: 0 1px 4px rgb(0 0 0 / 0.58);
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .ios-app-icon:active {
+    transform: scale(0.94);
+    opacity: 0.78;
+  }
+
+  .ios-app-icon img {
+    width: clamp(54px, 15vw, 62px);
+    height: clamp(54px, 15vw, 62px);
+    padding: 0;
+    border-radius: 14px;
+    box-shadow:
+      0 7px 15px rgb(5 10 27 / 0.25),
+      inset 0 0 0 0.5px rgb(255 255 255 / 0.34);
+    object-fit: cover;
+  }
+
+  .ios-app-icon span {
+    width: 100%;
+    overflow: hidden;
+    color: inherit;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .ios-page-dots {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: auto;
+    margin-bottom: 10px;
+  }
+
+  .ios-page-dots i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.42);
+  }
+
+  .ios-page-dots i.is-active {
+    background: rgb(255 255 255 / 0.92);
+  }
+
+  .ios-dock {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    width: 100%;
+    min-height: 78px;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    gap: 7px;
+    margin: 0;
+    padding: 9px 12px;
+    border: 1px solid rgb(255 255 255 / 0.32);
+    border-radius: 27px;
+    background: rgb(240 244 255 / 0.28);
+    box-shadow:
+      0 12px 32px rgb(5 11 30 / 0.2),
+      inset 0 1px 0 rgb(255 255 255 / 0.42);
+    backdrop-filter: blur(28px) saturate(1.45);
+  }
+
+  .ios-dock button,
+  .ios-dock a {
+    display: grid;
+    min-width: 54px;
+    min-height: 54px;
+    place-items: center;
+    justify-self: center;
+    padding: 0;
+    border: 0;
+    border-radius: 14px;
+    background: transparent;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .ios-dock button:active,
+  .ios-dock a:active {
+    transform: scale(0.9);
+    opacity: 0.72;
+  }
+
+  .ios-dock img {
+    width: 58px;
+    height: 58px;
+    border-radius: 14px;
+    object-fit: cover;
+    filter: drop-shadow(0 6px 8px rgb(5 10 27 / 0.2));
+  }
+
+  .ios-home-indicator {
+    position: relative;
+    z-index: 1;
+    width: 128px;
+    height: 5px;
+    align-self: center;
+    margin-top: 8px;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.86);
+  }
+
+  .ios-shell .ios-screen {
+    position: relative;
+    width: 100%;
+    height: 100dvh;
+    padding: 0;
+    overflow: hidden;
+    background: #f2f2f7;
+  }
+
+  .ios-screen-header {
+    position: relative;
+    z-index: 20;
+    display: grid;
+    min-height: 50px;
+    grid-template-columns: 92px 1fr 92px;
+    align-items: center;
+    margin: 48px 0 0;
+    padding: 0 12px;
+    color: #111114;
+    border-bottom: 0.5px solid rgb(60 60 67 / 0.18);
+    background: rgb(248 248 250 / 0.82);
+    backdrop-filter: blur(24px) saturate(1.5);
+  }
+
+  .ios-screen-header button {
+    position: static;
+    display: flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    gap: 1px;
+    justify-self: start;
+    padding: 0;
+    color: #007aff;
+    border: 0;
+    background: transparent;
+    font-size: 15px;
+  }
+
+  .ios-screen-header button svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .ios-screen-header h2 {
+    grid-column: 2;
+    color: #111114;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 650;
+  }
+
+  .ios-screen-body {
+    height: calc(100dvh - 98px);
+    padding: 22px 16px calc(env(safe-area-inset-bottom, 0px) + 28px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: #f2f2f7;
+    overscroll-behavior-y: contain;
+  }
+
+  .ios-list {
+    overflow: hidden;
+    border: 0;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 0.5px 0 rgb(60 60 67 / 0.12);
+  }
+
+  .ios-list li {
+    position: relative;
+    min-height: 68px;
+    gap: 13px;
+    padding: 10px 14px;
+    border-bottom: 0.5px solid rgb(60 60 67 / 0.18);
+    cursor: pointer;
+  }
+
+  .ios-list li:last-child {
+    border-bottom: 0;
+  }
+
+  .ios-list li::after {
+    margin-left: auto;
+    color: #c7c7cc;
+    content: "›";
+    font-size: 26px;
+    font-weight: 300;
+  }
+
+  .ios-list.stacked li::after {
+    display: none;
+  }
+
+  .ios-list li div p {
+    color: #111114;
+    font-size: 16px;
+    font-weight: 550;
+  }
+
+  .ios-list li div span {
+    display: block;
+    margin-top: 2px;
+    color: #8e8e93;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .ios-list-icon img {
+    width: 46px;
+    height: 46px;
+    border-radius: 11px;
+  }
+
+  .ios-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3px;
+  }
+
+  .ios-grid img {
+    height: auto;
+    aspect-ratio: 1;
+    border-radius: 3px;
+  }
+
+  .ios-blog-search {
+    position: sticky;
+    z-index: 2;
+    top: -22px;
+    padding-block: 8px 14px;
+    background: #f2f2f7;
+  }
+
+  .ios-blog-search input {
+    min-height: 40px;
+    padding: 0 14px;
+    border: 0;
+    border-radius: 11px;
+    background: rgb(118 118 128 / 0.12);
+    font-size: 16px;
+  }
+
+  .ios-card-stack {
+    display: grid;
+    gap: 12px;
+  }
+
+  .ios-card-stack li {
+    gap: 13px;
+    padding: 12px;
+    border: 0;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 0.5px 0 rgb(60 60 67 / 0.12);
+  }
+
+  .ios-card-stack img {
+    width: 88px;
+    height: 88px;
+    flex: 0 0 auto;
+    border-radius: 10px;
+  }
+
+  .ios-card-stack h3 {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+
+  .ios-profile img {
+    width: 112px;
+    height: 112px;
+    border: 3px solid #fff;
+    box-shadow: 0 4px 18px rgb(0 0 0 / 0.16);
+  }
+
+  .ios-contact-actions {
+    margin-top: 24px;
+  }
+
+  .ios-contact-actions .primary,
+  .ios-contact-actions a {
+    min-height: 48px;
+    border-radius: 13px;
+  }
+
+  .ios-notes,
+  .ios-about {
+    border: 0;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 0.5px 0 rgb(60 60 67 / 0.12);
+  }
+
+  .ios-desktop-prompt {
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding:
+      20px
+      12px
+      calc(env(safe-area-inset-bottom, 0px) + 12px);
+    background: rgb(4 8 18 / 0.42);
+    backdrop-filter: blur(10px);
+    animation: ios-prompt-fade 240ms ease-out both;
+  }
+
+  .ios-desktop-prompt-card {
+    position: relative;
+    width: min(100%, 430px);
+    padding: 24px 20px 18px;
+    border: 1px solid rgb(255 255 255 / 0.72);
+    border-radius: 26px;
+    background: rgb(249 249 251 / 0.9);
+    box-shadow: 0 24px 70px rgb(0 0 0 / 0.3);
+    backdrop-filter: blur(32px) saturate(1.5);
+    animation: ios-prompt-rise 360ms cubic-bezier(0.22, 0.8, 0.22, 1) both;
+  }
+
+  .ios-prompt-close {
+    position: absolute;
+    top: 13px;
+    right: 13px;
+    display: grid;
+    width: 32px;
+    height: 32px;
+    place-items: center;
+    color: #636366;
+    border: 0;
+    border-radius: 50%;
+    background: rgb(118 118 128 / 0.12);
+  }
+
+  .ios-prompt-icon {
+    display: grid;
+    width: 54px;
+    height: 54px;
+    margin-bottom: 16px;
+    place-items: center;
+    color: #fff;
+    border-radius: 15px;
+    background: linear-gradient(145deg, #3478f6, #5856d6);
+    box-shadow: 0 8px 20px rgb(52 120 246 / 0.28);
+  }
+
+  .ios-desktop-prompt-card h2 {
+    max-width: 280px;
+    color: #111114;
+    font-size: 22px;
+    line-height: 1.12;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+  }
+
+  .ios-desktop-prompt-card p {
+    margin-top: 9px;
+    color: #636366;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .ios-prompt-action {
+    width: 100%;
+    min-height: 50px;
+    margin-top: 20px;
+    color: #fff;
+    border: 0;
+    border-radius: 14px;
+    background: #007aff;
+    font-size: 16px;
+    font-weight: 650;
+  }
+
+  .ios-prompt-action:active {
+    background: #0066d6;
+    transform: scale(0.985);
+  }
+}
+
+@media (max-width: 359px) {
+  .ios-home {
+    padding-inline: 12px;
+  }
+
+  .ios-widget-grid {
+    gap: 8px;
+  }
+
+  .ios-home-icons {
+    gap: 16px 7px;
+  }
+
+  .ios-app-icon img {
+    width: 51px;
+    height: 51px;
+  }
+
+  .ios-dock {
+    padding-inline: 8px;
+  }
+
+  .ios-dock img {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+@media (max-height: 700px) and (max-width: 679px) {
+  .ios-home {
+    padding-top: 52px;
+  }
+
+  .ios-widget-grid {
+    margin-bottom: 15px;
+  }
+
+  .ios-date-widget,
+  .ios-profile-widget {
+    min-height: 104px;
+  }
+
+  .ios-home-icons {
+    gap-block: 12px;
+  }
+
+  .ios-app-icon {
+    min-height: 66px;
+  }
+
+  .ios-app-icon img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .ios-page-dots {
+    margin-bottom: 5px;
+  }
+
+  .ios-dock {
+    min-height: 68px;
+    padding-block: 6px;
+  }
+
+  .ios-dock img {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+@keyframes ios-prompt-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes ios-prompt-rise {
+  from { opacity: 0; transform: translateY(28px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }

@@ -7,5 +7,6 @@ import Image from './Image';
 import Contact from './Contact'
 import Photos from './Photos'
 import Mail from './Mail'
+import Chess from './Chess'
 
-export { Terminal, Safari, Resume, Finder, Text, Image, Contact, Photos, Mail };
+export { Terminal, Safari, Resume, Finder, Text, Image, Contact, Photos, Mail, Chess };

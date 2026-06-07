@@ -23,6 +23,14 @@ const Home = () => {
     return (
         <section id="home">
             <ul>
+                <li
+                    className="group folder top-10 right-10"
+                    onClick={() => openWindow('chess')}
+                    onDoubleClick={() => openWindow('chess')}
+                >
+                    <img src="/images/chess-app.svg" alt="Chess" />
+                    <p>Chess</p>
+                </li>
                 {projects.map((project) => (
                     <li
                         key={project.id}

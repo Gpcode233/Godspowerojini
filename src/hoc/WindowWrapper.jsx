@@ -8,22 +8,23 @@ const WindowWrapper = (Component, windowKey) => {
 
     const Wrapped = (props) => {
         const { focusWindow, windows } = useWindowStore();
-        const { isOpen, zIndex } = windows[windowKey];
+        const { isOpen, isMinimized, isMaximized, zIndex } = windows[windowKey];
+        const isVisible = isOpen && !isMinimized;
         const ref = useRef(null);
 
         useGSAP(() => {
             const el = ref.current;
-            if (!el || !isOpen) return;
+            if (!el || !isVisible) return;
 
             el.style.display = 'block';
 
-            gsap.fromTo(el, { scale: 0.8, opacity: 0, y: 40 },
-                { scale: 1, opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' })
+            gsap.fromTo(el, { scale: 0.85, opacity: 0, y: 24 },
+                { scale: 1, opacity: 1, y: 0, duration: 0.35, ease: 'power3.out' })
 
             return () => {
                 el.style.display = 'none';
             }
-        }, [isOpen]);
+        }, [isVisible]);
 
         useGSAP(() => {
             const el = ref.current;
@@ -34,6 +35,7 @@ const WindowWrapper = (Component, windowKey) => {
             const [instance] = Draggable.create(el, {
                 trigger: header ?? el,
                 onPress: () => focusWindow(windowKey),
+                enabled: !isMaximized,
             });
 
             const rightHandle = el.querySelector('.resize-handle-right');
@@ -74,13 +76,13 @@ const WindowWrapper = (Component, windowKey) => {
                 if (resizeBottom) resizeBottom.kill();
             };
 
-        }, []);
+        }, [isMaximized]);
 
         useLayoutEffect(() => {
             const el = ref.current;
             if (!el) return;
-            el.style.display = isOpen ? "block" : "none";
-        }, [isOpen]);
+            el.style.display = isVisible ? "block" : "none";
+        }, [isVisible]);
 
         return <section
             id={windowKey}
@@ -90,7 +92,7 @@ const WindowWrapper = (Component, windowKey) => {
                 display: 'flex',
                 flexDirection: 'column'
             }}
-            className="absolute"
+            className={isMaximized ? "absolute window-maximized" : "absolute"}
         >
             <Component {...props} />
             <div className="resize-handle resize-handle-right"></div>

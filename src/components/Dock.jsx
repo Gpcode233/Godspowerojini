@@ -7,7 +7,7 @@ import useWindowStore from '#store/window';
 
 function Dock() {
 
-    const { openWindow, closeWindow, windows } = useWindowStore();
+    const { openWindow, minimizeWindow, restoreWindow, windows } = useWindowStore();
     const dockRef = useRef(null);
 
     useGSAP(() => {
@@ -67,8 +67,10 @@ function Dock() {
             return;
         }
 
-        if (window.isOpen) {
-            closeWindow(app.id);
+        if (window.isMinimized) {
+            restoreWindow(app.id);
+        } else if (window.isOpen) {
+            minimizeWindow(app.id);
         } else {
             openWindow(app.id);
         }
@@ -97,7 +99,7 @@ function Dock() {
                             />
                         </button>
                         {canOpen && windows[id]?.isOpen && (
-                            <span className="dock-dot" />
+                            <span className={`dock-dot ${windows[id]?.isMinimized ? 'is-minimized' : ''}`} />
                         )}
                     </div>
                 ))}

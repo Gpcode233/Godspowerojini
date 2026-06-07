@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
 const CITIES = [
-  { name: "Lagos",    timezone: "Africa/Lagos" },
+  { name: "Dubai",    timezone: "Asia/Dubai" },
   { name: "New York", timezone: "America/New_York" },
   { name: "London",   timezone: "Europe/London" },
   { name: "Tokyo",    timezone: "Asia/Tokyo" },
