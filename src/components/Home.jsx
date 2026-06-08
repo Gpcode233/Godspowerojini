@@ -24,11 +24,11 @@ const Home = () => {
         <section id="home">
             <ul>
                 <li
-                    className="group folder top-10 right-10"
+                    className="group folder chess-shortcut top-[62vh] left-7"
                     onClick={() => openWindow('chess')}
                     onDoubleClick={() => openWindow('chess')}
                 >
-                    <img src="/images/chess-app.svg" alt="Chess" />
+                    <img src="/images/chess.svg" alt="Chess" />
                     <p>Chess</p>
                 </li>
                 {projects.map((project) => (

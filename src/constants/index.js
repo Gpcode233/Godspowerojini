@@ -69,7 +69,7 @@ const dockApps = [
   {
     id: "chess",
     name: "Chess",
-    icon: "chess-app.svg",
+    icon: "chess.svg",
     canOpen: true,
   },
   {
@@ -242,7 +242,7 @@ const WORK_LOCATION = {
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-10 left-5", // icon position inside Finder
-      windowPosition: "top-[5vh] left-5", // optional: Finder window position
+      windowPosition: "top-[5vh] left-7", // optional: Finder window position
       children: [
         {
           id: 1,
@@ -356,7 +356,7 @@ const WORK_LOCATION = {
           icon: "/images/txt.png",
           kind: "file",
           fileType: "txt",
-          position: "top-5 left-10",
+          position: "top-6 left-10",
           description: [
             "Ajently is an AI agent marketplace designed to handle tasks for individuals and businesses, from scheduling and research to content workflows and beyond.",
             "Built by Godspower Ojini, Ajently won the N2.7 million prize at the Enugu State Tech Festival (March 2026), competing against 20 teams across Nigeria.",
@@ -372,7 +372,7 @@ const WORK_LOCATION = {
           kind: "file",
           fileType: "url",
           href: "https://ajently-frontier.vercel.app/",
-          position: "top-20 left-20",
+          position: "top-6 left-64",
         },
         {
           id: 3,
@@ -380,7 +380,7 @@ const WORK_LOCATION = {
           icon: "/images/image.png",
           kind: "file",
           fileType: "img",
-          position: "top-52 left-80",
+          position: "top-48 left-10",
           imageUrl: "/images/Ajently.png",
         },
         {
@@ -389,7 +389,7 @@ const WORK_LOCATION = {
           icon: "/images/image.png",
           kind: "file",
           fileType: "img",
-          position: "top-52 left-80",
+          position: "top-48 left-64",
           imageUrl: "/images/AjentlyLogo.png",
         },
       ],
