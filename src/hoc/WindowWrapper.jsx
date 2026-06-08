@@ -20,10 +20,6 @@ const WindowWrapper = (Component, windowKey) => {
 
             gsap.fromTo(el, { scale: 0.85, opacity: 0, y: 24 },
                 { scale: 1, opacity: 1, y: 0, duration: 0.35, ease: 'power3.out' })
-
-            return () => {
-                el.style.display = 'none';
-            }
         }, [isVisible]);
 
         useGSAP(() => {

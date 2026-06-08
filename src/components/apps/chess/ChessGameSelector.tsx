@@ -49,7 +49,7 @@ export const ChessGameSelector = ({ onStart, onCancel }: ChessGameSelectorProps)
             New match
           </div>
           <h1 id="chess-onboarding-title">Play Chess</h1>
-          <p>Challenge yourself against a thoughtful computer opponent.</p>
+          <p>Challenge yourself against Godspower's Computer.</p>
         </div>
 
         <fieldset className="chess-choice-group">

@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ChessBoard } from "./ChessBoard";
+import { ChessCapturedPieces } from "./ChessCapturedPieces";
 import { ChessControls } from "./ChessControls";
 import { ChessGameSelector } from "./ChessGameSelector";
 import { ChessHeader } from "./ChessHeader";
@@ -50,6 +51,11 @@ export const ChessApp = ({ variant = "window", onCancel }: ChessAppProps) => {
                     <strong>Mac</strong>
                     <small>{game.settings.difficulty} computer</small>
                   </span>
+                  <ChessCapturedPieces
+                    history={game.history}
+                    currentPly={game.currentPly}
+                    capturerColor={game.settings.playerColor === "white" ? "b" : "w"}
+                  />
                   {game.isThinking ? <i className="chess-thinking-dots" aria-label="Thinking"><b /><b /><b /></i> : null}
                 </div>
 
@@ -71,6 +77,11 @@ export const ChessApp = ({ variant = "window", onCancel }: ChessAppProps) => {
                     <strong>You</strong>
                     <small>playing {game.settings.playerColor}</small>
                   </span>
+                  <ChessCapturedPieces
+                    history={game.history}
+                    currentPly={game.currentPly}
+                    capturerColor={game.settings.playerColor === "white" ? "w" : "b"}
+                  />
                   <span className="chess-turn-indicator" aria-hidden="true" />
                 </div>
               </div>
