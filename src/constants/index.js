@@ -359,7 +359,7 @@ const WORK_LOCATION = {
           position: "top-6 left-10",
           description: [
             "Ajently is an AI agent marketplace designed to handle tasks for individuals and businesses, from scheduling and research to content workflows and beyond.",
-            "Built by Godspower Ojini, Ajently won the N2.7 million prize at the Enugu State Tech Festival (March 2026), competing against 20 teams across Nigeria.",
+            "Built by Godspower Ojini, Ajently won the N2.7 million prize at the Enugu State Tech Festival (March 2026), competing against 20 teams across SouthEast Nigeria.",
             "The platform aims to reduce repetitive manual work by letting users delegate tasks to AI agents that operate autonomously on their behalf.",
             "Ajently is actively scaling into a globally accessible product, with over 150 people on the waitlist & a public release.",
           ],
@@ -371,7 +371,7 @@ const WORK_LOCATION = {
           icon: "/images/safari.png",
           kind: "file",
           fileType: "url",
-          href: "https://ajently-frontier.vercel.app/",
+          href: "https://ajently.com/",
           position: "top-6 left-64",
         },
         {
